@@ -21,7 +21,6 @@ $base_path = (strpos($_SERVER['PHP_SELF'], '/azioni/') !== false) ? "../" : "";
     <link rel="stylesheet" href="<?= $base_path ?>css/app.css">
 </head>
 <body>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">

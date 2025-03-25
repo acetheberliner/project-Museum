@@ -16,6 +16,34 @@ $loggedIn = isset($_SESSION['loggedin']);
     <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        .hero {
+            height: 70vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 0;
+            opacity: 0;
+        }
+
+        .bg-layer.visible {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body style="font-family: 'Poppins', sans-serif; background-color: #e3e6ea; color: #333;">
 
@@ -31,11 +59,14 @@ $loggedIn = isset($_SESSION['loggedin']);
     </nav>
 
     <!-- Hero Section -->
-    <div class="hero d-flex align-items-center text-center justify-content-center flex-column" 
-        style="background: linear-gradient(rgba(0, 0, 0, 0.37), rgba(0, 0, 0, 0.36)), url('https://images.unsplash.com/photo-1578301978018-3005759f48f7?q=80&w=2044&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat; 
-               max-height: 78vh; width: 100%; color: white; padding: 20px; display: flex;">
-        <div class="container">
-            <h1 style="max-width: 600px; margin: 0 auto; font-size: 2.5rem;" class="mb-4">Scopri il mondo dell'arte con <span class="text-warning">Project-Museum</span></h1>
+    <div class="hero position-relative overflow-hidden">
+        <div id="backgroundA" class="bg-layer"></div>
+        <div id="backgroundB" class="bg-layer"></div>
+        
+        <div class="container position-relative text-center z-1 text-white">
+            <h1 style="max-width: 600px; margin: 0 auto; font-size: 2.5rem;" class="mb-4">
+                Scopri il mondo dell'arte con <span class="text-warning">Project-Museum</span>
+            </h1>
             <p class="lead" style="font-size: 1.2rem;">Gestisci le mostre, le opere e i visitatori con semplicità</p>
             <?php if ($loggedIn): ?>
                 <a href="dashboard.php" class="btn btn-light btn-lg mt-3">📋 Vai alla Dashboard</a>
@@ -44,6 +75,7 @@ $loggedIn = isset($_SESSION['loggedin']);
             <?php endif; ?>
         </div>
     </div>
+
 
     <!-- Sezione Informazioni -->
     <div class="container py-5 text-center">
@@ -75,16 +107,46 @@ $loggedIn = isset($_SESSION['loggedin']);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Media Queries -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function adjustHeroHeight() {
-                document.querySelector('.hero').style.minHeight = window.innerHeight + 'px';
-            }
-            adjustHeroHeight();
-            window.addEventListener("resize", adjustHeroHeight);
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('inc/backgrounds.json')
+                .then(response => response.json())
+                .then(images => {
+                    let currentIndex = 0;
+                    let currentLayer = true;
+
+                    const layerA = document.getElementById("backgroundA");
+                    const layerB = document.getElementById("backgroundB");
+
+                    function setLayerBackground(layer, url) {
+                        layer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${url}')`;
+                    }
+
+                    function updateBackground() {
+                        const nextImage = images[currentIndex];
+                        currentIndex = (currentIndex + 1) % images.length;
+
+                        if (currentLayer) {
+                            setLayerBackground(layerB, nextImage);
+                            layerB.classList.add("visible");
+                            layerA.classList.remove("visible");
+                        } else {
+                            setLayerBackground(layerA, nextImage);
+                            layerA.classList.add("visible");
+                            layerB.classList.remove("visible");
+                        }
+
+                        currentLayer = !currentLayer;
+                    }
+
+                    // iniziale
+                    setLayerBackground(layerA, images[0]);
+                    layerA.classList.add("visible");
+                    currentIndex = 1;
+
+                    setInterval(updateBackground, 7000);
+                });
         });
     </script>
-
 </body>
 </html>
