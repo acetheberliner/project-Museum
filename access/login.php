@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . '/inc/require.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+require_once __DIR__ . '/../inc/require.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $utente['ute_id'];
         $_SESSION['user_nome'] = $utente['ute_nome'];
         $_SESSION['user_ruolo'] = $utente['ute_ruolo'];
-        header("Location: dashboard.php");
+        header("Location: ../dashboard.php");
         exit;
     } else {
         $errore = "Email o password errati!";

@@ -1,4 +1,4 @@
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<footer class="footer">
+    <p>© 2024 Project-Museum</p>
+    <p>Bagnolini Tommaso<br/><span class="text-info fw-bold">Laboratorio di Applicazioni e Servizi Web</span></p>
+</footer>

@@ -1,19 +1,18 @@
 <?php
-
-error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE ^ E_DEPRECATED);
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED);
 ini_set('display_errors', 1);
 
-require_once __DIR__ . '/../config/Database.php';
-require_once __DIR__ . '/../classi/Cliente.php';
-require_once __DIR__ . '/../classi/Opera.php';
-require_once __DIR__ . '/../classi/Mostra.php';
-require_once __DIR__ . '/../classi/Utente.php';
-require_once __DIR__ . '/../classi/Utils.php';
+$base = __DIR__ . '/../';
 
-// Debug: Verifica la connessione
+require_once $base . 'config/Database.php';
+require_once $base . 'classi/Cliente.php';
+require_once $base . 'classi/Opera.php';
+require_once $base . 'classi/Mostra.php';
+require_once $base . 'classi/Utente.php';
+require_once $base . 'classi/Utils.php';
+
 try {
     $dbo = new Database();
 } catch (Exception $e) {
-    die("❌ ERRORE DATABASE: " . $e->getMessage());
+    exit("❌ Errore connessione DB: " . $e->getMessage());
 }
-?>

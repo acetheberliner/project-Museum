@@ -16,34 +16,9 @@ $loggedIn = isset($_SESSION['loggedin']);
     <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <style>
-        .hero {
-            height: 70vh;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
 
-        .bg-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: opacity 1.5s ease-in-out;
-            z-index: 0;
-            opacity: 0;
-        }
-
-        .bg-layer.visible {
-            opacity: 1;
-        }
-    </style>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body style="font-family: 'Poppins', sans-serif; background-color: #e3e6ea; color: #333;">
 
@@ -58,7 +33,7 @@ $loggedIn = isset($_SESSION['loggedin']);
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- background -->
     <div class="hero position-relative overflow-hidden">
         <div id="backgroundA" class="bg-layer"></div>
         <div id="backgroundB" class="bg-layer"></div>
@@ -69,13 +44,12 @@ $loggedIn = isset($_SESSION['loggedin']);
             </h1>
             <p class="lead" style="font-size: 1.2rem;">Gestisci le mostre, le opere e i visitatori con semplicità</p>
             <?php if ($loggedIn): ?>
-                <a href="dashboard.php" class="btn btn-light btn-lg mt-3">📋 Vai alla Dashboard</a>
+                <a href="dashboard.php" class="btn btn-info btn-lg mt-3">📋 Vai alla Dashboard</a>
             <?php else: ?>
-                <a href="login.php" class="btn btn-primary btn-lg mt-2" style="z-index: 2; position: relative;">🔐 Accedi</a>
+                <a href="./access/login.php" class="btn btn-primary btn-lg mt-2" style="z-index: 2; position: relative;">🔐 Accedi</a>
             <?php endif; ?>
         </div>
     </div>
-
 
     <!-- Sezione Informazioni -->
     <div class="container py-5 text-center">
@@ -109,7 +83,7 @@ $loggedIn = isset($_SESSION['loggedin']);
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetch('inc/backgrounds.json')
+            fetch('utils/backgrounds.json')
                 .then(response => response.json())
                 .then(images => {
                     let currentIndex = 0;
@@ -118,20 +92,26 @@ $loggedIn = isset($_SESSION['loggedin']);
                     const layerA = document.getElementById("backgroundA");
                     const layerB = document.getElementById("backgroundB");
 
-                    function setLayerBackground(layer, url) {
+                    // preload immagini
+                    images.forEach(src => {
+                        const img = new Image();
+                        img.src = src;
+                    });
+
+                    const setBg = (layer, url) => {
                         layer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${url}')`;
                     }
 
-                    function updateBackground() {
-                        const nextImage = images[currentIndex];
+                    const updateBg = () => {
+                        const next = images[currentIndex];
                         currentIndex = (currentIndex + 1) % images.length;
 
                         if (currentLayer) {
-                            setLayerBackground(layerB, nextImage);
+                            setBg(layerB, next);
                             layerB.classList.add("visible");
                             layerA.classList.remove("visible");
                         } else {
-                            setLayerBackground(layerA, nextImage);
+                            setBg(layerA, next);
                             layerA.classList.add("visible");
                             layerB.classList.remove("visible");
                         }
@@ -139,12 +119,11 @@ $loggedIn = isset($_SESSION['loggedin']);
                         currentLayer = !currentLayer;
                     }
 
-                    // iniziale
-                    setLayerBackground(layerA, images[0]);
+                    setBg(layerA, images[0]);
                     layerA.classList.add("visible");
                     currentIndex = 1;
 
-                    setInterval(updateBackground, 7000);
+                    setInterval(updateBg, 7000);
                 });
         });
     </script>
