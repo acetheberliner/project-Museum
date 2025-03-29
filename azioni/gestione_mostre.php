@@ -82,7 +82,7 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-custom">
         <div class="dashboard-header">
-            <h1>Gestione Mostre</h1>
+            <h1>🎪 Gestione Mostre</h1>
         </div>
 
         <!-- Form Aggiunta/Modifica Mostra -->
@@ -101,6 +101,14 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
                 </form>
             </div>
         <?php endif; ?>
+
+        <!-- Barra di ricerca -->
+        <form method="GET" class="my-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cerca per titolo..." value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">🔍 Cerca</button>
+            </div>
+        </form>
 
         <!-- Lista Mostre -->
         <div class="card card-custom p-3">

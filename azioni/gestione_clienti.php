@@ -74,7 +74,7 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-custom">
         <div class="dashboard-header">
-            <h1>Gestione Clienti</h1>
+            <h1>👤 Gestione Clienti</h1>
         </div>
 
         <!-- Form Aggiunta/Modifica Cliente -->

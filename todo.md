@@ -11,10 +11,10 @@ MENO URGENTI -------------------------------------------------------------------
 - riorganizzare file [FATTO]
     - sistemare percorsi [FATTO]
 - modulizzare e centralizzare il piu possibile [FATTO]
-- rendere tutto replicabile e uniforme
+- rendere tutto replicabile e uniforme [FATTO]
 
 OPZIONALI -----------------------------------------------------------------------------------------
 - aggiungere 2FA per logout
-- colore rosso per logout sidebar
+- colore rosso per logout sidebar [FATTO]
 - background mutable in dashboard
-- aggiungere emoji in titoli pagine
+- aggiungere emoji in titoli pagine [FATTO]

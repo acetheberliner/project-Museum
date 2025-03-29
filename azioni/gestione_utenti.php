@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container-custom">
         <div class="dashboard-header">
-            <h1>Gestione Utenti</h1>
+            <h1>🔐 Gestione Utenti</h1>
         </div>
 
         <!-- Form Aggiunta/Modifica Utente -->
@@ -95,6 +95,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-success">💾 Salva</button>
             </form>
         </div>
+
+        <!-- Barra di ricerca -->
+        <form method="GET" class="my-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cerca per nome o email..." value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">🔍 Cerca</button>
+            </div>
+        </form>
 
         <div class="card card-custom p-3">
             <h2>Lista Utenti</h2>
