@@ -1,11 +1,15 @@
 <?php
 require_once __DIR__ . '/../inc/require.php';
-session_start();
+require_once __DIR__ . '/../classi/Utils.php';
 
+session_start();
 if (!isset($_SESSION['loggedin'])) {
     header("Location: ../access/login.php");
     exit;
 }
+
+$page_title = 'Gestione Mostre';
+require_once __DIR__ . '/../inc/head.php';
 
 $limit = 5; 
 $page = $_GET['page'] ?? 1;
@@ -71,17 +75,6 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <title>Gestione Mostre - Project-Museum</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="../css/app.css">
-</head>
 <body>
 
     <!-- Sidebar -->
@@ -128,8 +121,8 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
                         <tr>
                             <td><?= $mostra['mos_id'] ?></td>
                             <td><?= htmlspecialchars($mostra['mos_nome']) ?></td>
-                            <td><?= htmlspecialchars($mostra['mos_data_inizio']) ?></td>
-                            <td><?= htmlspecialchars($mostra['mos_data_fine']) ?></td>
+                            <td><?= htmlspecialchars(Utils::raw2date($mostra['mos_data_inizio'])) ?></td>
+                            <td><?= htmlspecialchars(Utils::raw2date($mostra['mos_data_fine'])) ?></td>
                             <?php if ($ruolo === 'admin'): ?>
                                 <td>
                                     <a href="?azione=modifica&id=<?= $cliente['cli_id'] ?>" class="btn btn-warning btn-sm">✏️</a>

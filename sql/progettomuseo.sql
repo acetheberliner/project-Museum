@@ -82,11 +82,10 @@ CREATE TABLE `utenti` (
   UNIQUE KEY `ute_email` (`ute_email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `utenti` (`ute_id`, `ute_nome`, `ute_email`, `ute_password`, `ute_ruolo`) VALUES
-(1, 'Admin', 'admin@museo.com', '$2y$10$Fk3wNmcd/QdIWoMpj28jleMvhusDD/KIODVR7hq3dFx9Vo.GkTO0u', 'admin'),
-(4, 'Curatore1', 'curatore1@museo.com', '$2y$10$InUlKv.ENacDLMm6MR/sdOdtGf5rq3AFB6HP6Uz68B9x.M6Avy/cS', 'user'),
-(5, 'Curatore2', 'curatore2@museo.com', '$2y$10$iW7VbQSpZPpDD/8I8HZdrOkirDo3jrz9hjAv3HhWFhWrc8ZMS9qIy', 'user'),
-(6, 'Responsabile Mostre', 'responsabile@museo.com', '$2y$10$aFkMwPuHn7K2y3wAgZOAGeqX2QAL.h0U7kbPIGGTniItDHnlx2aZy', 'user'),
-(7, 'Assistente', 'assistente@museo.com', '$2y$10$82M/cCoburpBP02i4tUnYe05Adt.IQmnSyUxpQoPl7KL57EXajuYK', 'user');
+/*
+  ⚠️ Inserimento utenti da fare tramite script PHP:
+  utils/populate_users.php
+  Questo assicura che le password vengano salvate in forma hashata.
+*/
 
 COMMIT;

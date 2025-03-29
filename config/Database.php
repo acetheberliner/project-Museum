@@ -1,13 +1,16 @@
 <?php
 
 require_once "config.php";
+require_once "interface_DB.php";
 
-class Database {
+class Database implements IDatabase {
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = DB_PASS;
     private $dbname = DB_NAME;
+    
     private $dbh;
+
     private $stmt;
     public $error;
 
@@ -18,7 +21,10 @@ class Database {
         $this->dbname = $dbname ?? $this->dbname;
 
         $dsn = "mysql:host={$this->host};dbname={$this->dbname}";
-        $opt = [PDO::ATTR_PERSISTENT => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+        $opt = [
+            PDO::ATTR_PERSISTENT => false,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ];
 
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $opt);
@@ -28,11 +34,11 @@ class Database {
         }
     }
 
-    public function query($sql) {
+    public function query($sql): void {
         $this->stmt = $this->dbh->prepare($sql);
     }
 
-    public function bind($param, $value, $type = null) {
+    public function bind($param, $value, $type = null): void {
         if ($type === null) {
             $type = match (true) {
                 is_int($value)   => PDO::PARAM_INT,
@@ -44,37 +50,25 @@ class Database {
         $this->stmt->bindValue($param, $value, $type);
     }
 
-    public function execute($data = null) {
+    public function execute($data = null): bool {
         try {
             return $this->stmt->execute($data);
         } catch (PDOException $e) {
-            die("❌ Errore PDO: " . $e->getMessage());
+            die("❌ Errore relativo al PDO: " . $e->getMessage());
         }
     }
 
-    public function resultset() {
+    public function resultset(): array {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function single() {
+    public function single(): array|false {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function rowCount() {
-        return $this->stmt->rowCount();
-    }
-
-    public function lastInsertId() {
-        return $this->dbh->lastInsertId();
-    }
-
-    public function close() {
-        $this->dbh = $this->stmt = null;
-    }
-
-    public function insert($table, $data) {
+    public function insert(string $table, array $data): bool {
         $cols = implode(',', array_keys($data));
         $vals = ':' . implode(', :', array_keys($data));
         $this->query("INSERT INTO $table ($cols) VALUES ($vals)");
@@ -82,13 +76,13 @@ class Database {
         return $this->execute();
     }
 
-    public function find($table, $column, $value) {
+    public function find(string $table, string $column, mixed $value): array|false {
         $this->query("SELECT * FROM $table WHERE $column = :value LIMIT 1");
         $this->bind(':value', $value);
         return $this->single();
     }
 
-    public function update($table, $id_field, $id_value, $data) {
+    public function update(string $table, string $id_field, mixed $id_value, array $data): bool {
         $set = implode(', ', array_map(fn($k) => "$k=:$k", array_keys(array_diff_key($data, [$id_field => true]))));
         $this->query("UPDATE $table SET $set WHERE `$id_field` = :$id_field");
         foreach ($data as $k => $v) if ($k !== $id_field) $this->bind(":$k", $v);
@@ -96,7 +90,7 @@ class Database {
         return $this->execute();
     }
 
-    public function delete($table, $id_field, $id_value) {
+    public function delete(string $table, string $id_field, mixed $id_value): bool {
         $this->query("DELETE FROM $table WHERE $id_field = :id");
         $this->bind(":id", $id_value);
         return $this->execute();

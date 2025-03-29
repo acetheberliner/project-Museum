@@ -1,39 +1,38 @@
 <?php
-require_once __DIR__ . '/config/Database.php';
+require_once __DIR__ . '/../config/Database.php';
 
 $dbo = new Database();
 
+// elenco utenti da inserire
 $utenti = [
+    ['Admin', 'admin@museo.com', 'admin123', 'admin'],
     ['Curatore1', 'curatore1@museo.com', 'curatore123', 'user'],
     ['Curatore2', 'curatore2@museo.com', 'curatore123', 'user'],
     ['Responsabile Mostre', 'responsabile@museo.com', 'mostre123', 'user'],
     ['Assistente', 'assistente@museo.com', 'assistente123', 'user']
 ];
 
-foreach ($utenti as $utente) {
-    $nome = $utente[0];
-    $email = $utente[1];
-    $password = password_hash($utente[2], PASSWORD_DEFAULT); // Hash password
-    $ruolo = $utente[3];
+foreach ($utenti as [$nome, $email, $plainPassword, $ruolo]) {
+    // verifica se esiste già l'utente
+    $existing = $dbo->find('utenti', 'ute_email', $email);
+
+    if ($existing) {
+        echo "⚠️ Utente <strong>$email</strong> già presente, salto...<br>";
+        continue;
+    }
+
+    $hashed = password_hash($plainPassword, PASSWORD_DEFAULT); // hash della password per la sicurezza nel db
 
     try {
-        $query = "INSERT INTO utenti (ute_nome, ute_email, ute_password, ute_ruolo) 
-                  VALUES (:nome, :email, :password, :ruolo)";
-        $dbo->query($query);
-        $dbo->bind(':nome', $nome);
-        $dbo->bind(':email', $email);
-        $dbo->bind(':password', $password);
-        $dbo->bind(':ruolo', $ruolo);
+        $dbo->insert('utenti', [
+            'ute_nome'     => $nome,
+            'ute_email'    => $email,
+            'ute_password' => $hashed,
+            'ute_ruolo'    => $ruolo
+        ]);
 
-        $result = $dbo->execute();
-
-        if ($result) {
-            echo "✅ Utente $nome inserito con successo!<br>";
-        } else {
-            echo "❌ Errore nell'inserimento di $nome!<br>";
-        }
+        echo "✅ Utente <strong>$nome</strong> ($email) inserito con successo.<br>";
     } catch (PDOException $e) {
-        echo "❌ Errore SQL: " . $e->getMessage() . "<br>";
+        echo "❌ Errore con $email: " . $e->getMessage() . "<br>";
     }
 }
-?>

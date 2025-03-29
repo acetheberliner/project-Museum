@@ -123,7 +123,7 @@ $loggedIn = isset($_SESSION['loggedin']);
                     layerA.classList.add("visible");
                     currentIndex = 1;
 
-                    setInterval(updateBg, 7000);
+                    setInterval(updateBg, 3000);
                 });
         });
     </script>

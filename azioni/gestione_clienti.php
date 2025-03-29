@@ -7,7 +7,10 @@ if (!isset($_SESSION['loggedin'])) {
     exit;
 }
 
-$limit = 5; // Clienti per pagina
+$page_title = 'Gestione Clienti';
+require_once __DIR__ . '/../inc/head.php';
+
+$limit = 5;
 $page = $_GET['page'] ?? 1;
 $offset = ($page - 1) * $limit;
 
@@ -27,20 +30,17 @@ if ($search) {
 
 $clienti = Cliente::getClienti("$where LIMIT $limit OFFSET $offset", $bind);
 
-// Eliminazione cliente (solo admin)
 if ($ruolo === 'admin' && isset($_GET['azione']) && $_GET['azione'] == 'elimina' && isset($_GET['id'])) {
     $dbo->delete('clienti', 'cli_id', $_GET['id']);
     header("Location: gestione_clienti.php?success=Cliente eliminato");
     exit;
 }
 
-// Recupero dati cliente per modifica
 $edit_cliente = null;
 if ($ruolo === 'admin' && isset($_GET['azione']) && $_GET['azione'] == 'modifica' && isset($_GET['id'])) {
     $edit_cliente = $dbo->find('clienti', 'cli_id', $_GET['id']);
 }
 
-// Inserimento o modifica cliente
 if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
     $id_cliente = $_POST['cli_id'] ?? null;
     $nome = $_POST['cli_nome'];
@@ -48,14 +48,12 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
     $telefono = $_POST['cli_telefono'];
 
     if (!empty($id_cliente)) {
-        // Modifica cliente
         $dbo->update('clienti', 'cli_id', $id_cliente, [
             'cli_nome' => $nome,
             'cli_email' => $email,
             'cli_telefono' => $telefono
         ]);
     } else {
-        // Inserimento nuovo cliente
         $dbo->insert('clienti', [
             'cli_nome' => $nome,
             'cli_email' => $email,
@@ -70,17 +68,6 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <title>Gestione Clienti - Project-Museum</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="../css/app.css">
-</head>
 <body>
     <!-- Sidebar -->
     <?php require_once __DIR__ . '/../inc/sidebar.php'; ?>

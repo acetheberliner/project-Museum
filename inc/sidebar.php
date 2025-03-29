@@ -38,10 +38,19 @@ $base = $in_azioni ? '../' : '';
 }
 
 .sidebar a:hover,
+
 .sidebar a.active {
   background: #292b3a;
   border-left: 5px solid #00b4d8;
   padding-left: 15px;
+  color: #00b4d8;
+}
+
+.sidebar a.logout-link:hover {
+  background: #292b3a;
+  border-left: 5px solid #dc3545;
+  padding-left: 15px;
+  color: #dc3545;
 }
 
 .sidebar .user-info {
@@ -63,7 +72,7 @@ $base = $in_azioni ? '../' : '';
 <div class="sidebar">
     <div class="user-info border-0 text-center">
         <!-- immagine avatar generata dinamicamente usando l'id utente come parametro per ottenere un'immagine unica -->
-        <img src="https://i.pravatar.cc/100?u=<?= $user_id ?>" alt="Avatar" style="width:90px;height:90px;border-radius:50%;border:3px solid #00b4d8;margin-bottom:10px;">
+        <img src="https://i.pravatar.cc/100?u=<?= $user_id ?>" alt="Avatar">
 
         <!-- Protegge da attacchi XSS -->
         <h5><?= htmlspecialchars($user_name) ?></h5>
@@ -87,5 +96,5 @@ $base = $in_azioni ? '../' : '';
         echo "<a href='{$base}azioni/gestione_utenti.php'><i class='bi bi-key'></i> Utenti</a>";
     }
     ?>
-    <a href="<?= $base ?>access/logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    <a href="<?= $base ?>access/logout.php" class="logout-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
 </div>

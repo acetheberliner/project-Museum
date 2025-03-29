@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/inc/require.php';
-session_start();
+require_once __DIR__ . '/inc/head.php';
 
+session_start();
 if (!isset($_SESSION['loggedin'])) {
     header("Location: access/login.php");
     exit;
@@ -14,25 +15,20 @@ $num_clienti = count(Cliente::getClienti());
 $num_opere = count(Opera::getOpere());
 $num_mostre = count(Mostra::getMostre());
 $num_utenti = count(Utente::getUtenti());
+
+$cards = [
+    ['label' => 'Clienti', 'icon' => 'bi-people', 'count' => $num_clienti],
+    ['label' => 'Opere', 'icon' => 'bi-image', 'count' => $num_opere],
+    ['label' => 'Mostre', 'icon' => 'bi-bank', 'count' => $num_mostre],
+];
+
+if ($ruolo === 'admin') {
+    $cards[] = ['label' => 'Utenti', 'icon' => 'bi-person-check', 'count' => $num_utenti];
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Project-Museum</title>
-
-    <!-- Font Google: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="css/app.css">
-</head>
 <body>
 
     <!-- Wrapper -->
@@ -50,36 +46,15 @@ $num_utenti = count(Utente::getUtenti());
 
             <!-- Cards -->
             <div class="row mt-4 g-4">
-                <div class="col-md-3">
-                    <div class="dashboard-card">
-                        <i class="bi bi-people"></i>
-                        <h4>Clienti</h4>
-                        <p class="fs-3"><?= $num_clienti ?></p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="dashboard-card">
-                        <i class="bi bi-image"></i>
-                        <h4>Opere</h4>
-                        <p class="fs-3"><?= $num_opere ?></p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="dashboard-card">
-                        <i class="bi bi-bank"></i>
-                        <h4>Mostre</h4>
-                        <p class="fs-3"><?= $num_mostre ?></p>
-                    </div>
-                </div>
-                <?php if ($ruolo === 'admin'): ?>
+                <?php foreach ($cards as $card): ?>
                     <div class="col-md-3">
                         <div class="dashboard-card">
-                            <i class="bi bi-person-check"></i>
-                            <h4>Utenti</h4>
-                            <p class="fs-3"><?= $num_utenti ?></p>
+                            <i class="bi <?= $card['icon'] ?>"></i>
+                            <h4><?= $card['label'] ?></h4>
+                            <p class="fs-3"><?= $card['count'] ?></p>
                         </div>
                     </div>
-                <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
 
