@@ -127,7 +127,7 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
                             <td><?= htmlspecialchars($cliente['cli_telefono']) ?></td>
                             <?php if ($ruolo === 'admin'): ?>
                                 <td>
-                                    <a href="?azione=modifica&id=<?= $cliente['cli_id'] ?>" class="btn btn-warning btn-sm">✏️</a>
+                                    <a href="?azione=modifica&id=<?= $cliente['cli_id'] ?>" class="btn btn-warning btn-sm">✐</a>
                                     <a href="?azione=elimina&id=<?= $cliente['cli_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Eliminare il cliente?')">🗑️</a>
                                 </td>
                             <?php endif; ?>

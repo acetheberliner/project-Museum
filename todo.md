@@ -2,8 +2,8 @@ TO-DO List
 
 URGENTI -------------------------------------------------------------------------------------------
 - aggiungere ricerca oltre che da clienti in tutti le altre pagine [FATTO]
-- aggiungere modifica in tutte le pagine
-- fixare modifica in mostre
+- aggiungere modifica in tutte le pagine [FATTO]
+- fixare modifica in mostre [FATTO]
 
 MENO URGENTI --------------------------------------------------------------------------------------
 - compattare/pulire codice
