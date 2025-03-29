@@ -10,7 +10,7 @@ $base = $in_azioni ? '../' : '';
 ?>
 
 <style>
-    .sidebar {
+  .sidebar {
   width: 250px;
   height: 100vh;
   position: fixed;
@@ -78,7 +78,9 @@ $base = $in_azioni ? '../' : '';
         <h5><?= htmlspecialchars($user_name) ?></h5>
         
         <!-- Come capitalize() rende la prima lettera maiuscola -->
-        <p><?= ucfirst($user_role) ?></p>
+         <div class="border rounded-3 mx-auto" style="width: max-content; padding: 0.3rem 0.6rem; font-size: 0.9rem">
+           <p class="mb-0" style="font-size: 0.7rem;"><?= ucfirst($user_role) ?></p>
+         </div>
     </div>
     <?php
     $links = [
