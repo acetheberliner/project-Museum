@@ -26,7 +26,7 @@ $where = '';
 $bind = [];
 
 if ($search) {
-    $where = "AND (mostra_nome LIKE :search)";
+    $where = "AND (mos_nome LIKE :search)";
     $bind['search'] = "%$search%";
 }
 

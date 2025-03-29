@@ -96,7 +96,7 @@ if ($ruolo === 'admin' && $_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Barra di ricerca -->
         <form method="GET" class="my-3">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Cerca per nome o email..." value="<?= htmlspecialchars($search) ?>">
+                <input type="text" name="search" class="form-control" placeholder="Cerca per titolo o autore..." value="<?= htmlspecialchars($search) ?>">
                 <button type="submit" class="btn btn-primary">🔍 Cerca</button>
             </div>
         </form>
