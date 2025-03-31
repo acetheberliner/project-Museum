@@ -98,5 +98,20 @@ $base = $in_azioni ? '../' : '';
         echo "<a href='{$base}azioni/gestione_utenti.php'><i class='bi bi-key'></i> Utenti</a>";
     }
     ?>
-    <a href="<?= $base ?>access/logout.php" class="logout-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    <!-- <a href="<?= $base ?>access/logout.php" class="logout-link"><i class="bi bi-box-arrow-right"></i> Logout</a> -->
+    <a href="#" id="logout-link" class="logout-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const logoutLink = document.getElementById("logout-link");
+
+    logoutLink.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      if (confirm("Sei sicuro di voler effettuare il logout?")) {
+        window.location.href = "<?= $base ?>access/logout.php";
+      }
+    });
+  });
+</script>
