@@ -16,5 +16,5 @@ MENO URGENTI -------------------------------------------------------------------
 OPZIONALI -----------------------------------------------------------------------------------------
 - aggiungere 2FA per logout
 - colore rosso per logout sidebar [FATTO]
-- background mutable in dashboard  (RIFIUTATO)
+- background mutable in dashboard  (ABORT)
 - aggiungere emoji in titoli pagine [FATTO]

@@ -80,11 +80,11 @@ if ($ruolo === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form method="post">
                     <input type="hidden" name="ope_id" value="<?= $edit_opera['ope_id'] ?? '' ?>">
                     <label>Titolo:</label>
-                    <input type="text" name="ope_titolo" required class="form-control mb-2" value="<?= $edit_opera['ope_titolo'] ?? '' ?>">
+                    <input type="text" name="ope_titolo" required class="form-control mb-2" placeholder="Inserisci un titolo" value="<?= $edit_opera['ope_titolo'] ?? '' ?>">
                     <label>Autore:</label>
-                    <input type="text" name="ope_autore" required class="form-control mb-2" value="<?= $edit_opera['ope_autore'] ?? '' ?>">
+                    <input type="text" name="ope_autore" required class="form-control mb-2" placeholder="Inserisci un autore" value="<?= $edit_opera['ope_autore'] ?? '' ?>">
                     <label>Anno:</label>
-                    <input type="number" name="ope_anno" class="form-control mb-3" value="<?= $edit_opera['ope_anno'] ?? '' ?>">
+                    <input type="number" name="ope_anno" class="form-control mb-3" placeholder="Inserisci un anno" value="<?= $edit_opera['ope_anno'] ?? '' ?>">
                     <button type="submit" class="btn btn-success">💾 Salva</button>
                     <?php if ($edit_opera): ?>
                         <a href="gestione_opere.php" class="btn btn-secondary">❌ Annulla</a>
