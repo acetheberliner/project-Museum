@@ -30,8 +30,8 @@ class Database implements IDatabase {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $opt);
             $this->dbh->exec("SET NAMES 'utf8'");
         } catch (PDOException $e) {
-            $this->error = $e->getMessage();
-        }
+            die("❌ Errore connessione al DB: " . $e->getMessage());
+        }        
     }
 
     public function query($sql): void {
