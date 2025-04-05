@@ -41,17 +41,22 @@ CREATE TABLE `opere` (
   `ope_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ope_titolo` varchar(255) NOT NULL,
   `ope_autore` varchar(255) NOT NULL,
-  `ope_anno` year(4) DEFAULT NULL,
+  `ope_anno` varchar(4) DEFAULT NULL,
   `ope_descrizione` text DEFAULT NULL,
   PRIMARY KEY (`ope_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `opere` (`ope_id`, `ope_titolo`, `ope_autore`, `ope_anno`, `ope_descrizione`) VALUES
-(1, 'Monna Lisa', 'Leonardo da Vinci', '0000', 'Ritratto iconico'),
-(2, 'La Notte Stellata', 'Vincent van Gogh', '0000', 'Capolavoro post-impressionista'),
-(3, 'L’Urlo', 'Edvard Munch', '0000', 'Espressione angosciata'),
-(4, 'La Creazione di Adamo', 'Michelangelo', '0000', 'Affresco della Cappella Sistina'),
-(5, 'Guernica', 'Pablo Picasso', '1937', 'Denuncia della guerra civile spagnola');
+(1, 'Monna Lisa', 'Leonardo da Vinci', '1503', 'Ritratto iconico'),
+(2, 'La Notte Stellata', 'Vincent van Gogh', '1889', 'Capolavoro post-impressionista'),
+(3, 'L’Urlo', 'Edvard Munch', '1893', 'Espressione angosciata'),
+(4, 'La Creazione di Adamo', 'Michelangelo', '1512', 'Affresco della Cappella Sistina'),
+(5, 'Guernica', 'Pablo Picasso', '1937', 'Denuncia della guerra civile spagnola'),
+(6, 'La Ragazza con l’orecchino di perla', 'Johannes Vermeer', '1665', 'Ritratto enigmatico spesso chiamato “la Monna Lisa olandese”'),
+(7, 'Il Bacio', 'Gustav Klimt', '1908', 'Icona del simbolismo e dell’Art Nouveau'),
+(8, 'Las Meninas', 'Diego Velázquez', '1656', 'Ritratto complesso della famiglia reale spagnola'),
+(9, 'La Persistenza della Memoria', 'Salvador Dalí', '1931', 'Opera simbolo del surrealismo'),
+(10, 'Nascita di Venere', 'Sandro Botticelli', '1486', 'Celebre rappresentazione mitologica su conchiglia');
 
 CREATE TABLE `mostre_opere` (
   `mos_id` int(11) UNSIGNED NOT NULL,
