@@ -98,7 +98,7 @@ $base = $in_azioni ? '../' : '';
         echo "<a href='{$base}azioni/gestione_utenti.php'><i class='bi bi-key'></i> Utenti</a>";
     }
     ?>
-    <!-- <a href="<?= $base ?>access/logout.php" class="logout-link"><i class="bi bi-box-arrow-right"></i> Logout</a> -->
+    <a href="<?= $base ?>api_test.php" class="btn btn-outline-dark w-fit"><i class="bi bi-cone-striped"></i> Test API</a>
     <a href="#" id="logout-link" class="logout-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
 </div>
 

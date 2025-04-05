@@ -39,9 +39,12 @@ if ($ruolo === 'admin') {
 
         <!-- Contenuto -->
         <div class="content">
-            <div class="dashboard-header">
+            <div class="dashboard-header d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <h1>Benvenuto, <?= htmlspecialchars($_SESSION['user_nome']) ?> 👋</h1>
-                <a href="azioni/gestione_opere.php" class="btn btn-modern">+ Aggiungi Nuova Opera</a>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="azioni/gestione_opere.php" class="btn btn-modern">+ Aggiungi Nuova Opera</a>
+                    <a href="apidoc.php" class="btn btn-outline-primary"><i class="bi bi-journal-bookmark"></i> API DOC</a>
+                </div>
             </div>
 
             <!-- Cards -->
