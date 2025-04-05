@@ -52,30 +52,7 @@ if (!isset($_SESSION['loggedin'])) {
         <pre id="result" class="result-box w-75">// La risposta apparirà qui</pre>
     </div>
 
-    <!-- Script -->
-    <script>
-        const BASE_URL = 'http://localhost/laboratorio/progettoMuseo/api/';
-        const APIKEY = 'b4st0I5868HdCLAdeotkrSPGdeT1Df9ixpeQpWgD';
-
-        document.getElementById('callApi').addEventListener('click', async () => {
-            const endpoint = document.getElementById('apiSelect').value;
-            const resultBox = document.getElementById('result');
-            resultBox.textContent = '// caricamento...';
-
-            try {
-                const response = await fetch(BASE_URL + endpoint, {
-                    headers: {
-                        'APIKEY': APIKEY,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                const data = await response.json();
-                resultBox.textContent = JSON.stringify(data, null, 4);
-            } catch (err) {
-                resultBox.textContent = '// Errore nella richiesta: ' + err.message;
-            }
-        });
-    </script>
+    <!-- Script esterno -->
+    <script src="js/index.js"></script>
 </body>
 </html>
