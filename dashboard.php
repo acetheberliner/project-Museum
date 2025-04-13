@@ -40,7 +40,7 @@ if ($ruolo === 'admin') {
         <!-- Contenuto -->
         <div class="content">
             <div class="dashboard-header d-flex justify-content-between align-items-center flex-wrap gap-3">
-                <h1>Benvenuto, <?= htmlspecialchars($_SESSION['user_nome']) ?> 👋</h1>
+                <h1>Benvenuto, <span class="text-info"><?= htmlspecialchars($_SESSION['user_nome']) ?></span> 👋</h1>
                 <div class="d-flex gap-2 flex-wrap">
                     <a href="azioni/gestione_opere.php" class="btn btn-modern">+ Aggiungi Nuova Opera</a>
                     <a href="apidoc.php" class="btn btn-outline-primary"><i class="bi bi-journal-bookmark"></i> API DOC</a>
@@ -58,6 +58,27 @@ if ($ruolo === 'admin') {
                         </div>
                     </div>
                 <?php endforeach; ?>
+            </div>
+
+            <!-- Web Services -->
+            <div class="mt-5">
+                <h3 class="mb-4">🧪 Web Services</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="dashboard-card" onclick="location.href='webservice/wsMostra.php'" style="cursor:pointer;">
+                            <i class="bi bi-binoculars"></i>
+                            <h5>Tracking Mostra</h5>
+                            <p>Visualizza i dettagli e le opere di una mostra inserendo il suo ID.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dashboard-card" onclick="location.href='webservice/wsCliente.php'" style="cursor:pointer;">
+                            <i class="bi bi-telephone"></i>
+                            <h5>Aggiorna Cliente</h5>
+                            <p>Modifica il numero di telefono di un cliente esistente.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

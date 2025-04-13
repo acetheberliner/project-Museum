@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultBox.textContent = '// caricamento...';
 
         try {
-            const response = await fetch(`${BASE_URL}api.php?uri=${endpoint}`, {
+            const response = await fetch(`${BASE_URL}${endpoint}`, {
                 headers: {
                     'APIKEY': APIKEY,
                     'Content-Type': 'application/json'

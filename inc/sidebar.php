@@ -72,7 +72,7 @@ $base = $in_azioni ? '../' : '';
 <div class="sidebar">
     <div class="user-info border-0 text-center">
         <!-- immagine avatar generata dinamicamente usando l'id utente come parametro per ottenere un'immagine unica -->
-        <img src="https://i.pravatar.cc/100?u=<?= $user_id ?>" alt="Avatar">
+        <img src="https://i.pravatar.cc/100?img=<?= $user_id + 68 ?>" alt="Avatar"> <!-- 68 è solo un "seed" per pravatar.cc per ottenere un pool di pfp che mi piacesse  -->
 
         <!-- Protegge da attacchi XSS -->
         <h5><?= htmlspecialchars($user_name) ?></h5>
