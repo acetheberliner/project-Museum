@@ -5,8 +5,17 @@ $dbo = new Database();
 define('API_KEY', 'b4st0I5868HdCLAdeotkrSPGdeT1Df9ixpeQpWgD');
 
 // Headers + autenticazione
-$headers = getallheaders();
-if (!isset($headers['APIKEY']) || $headers['APIKEY'] !== API_KEY) {
+$headers = [];
+foreach ($_SERVER as $name => $value) {
+    if (str_starts_with($name, 'HTTP_')) {
+        $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+        $headers[$key] = $value;
+    }
+}
+
+$receivedKey = $headers['Apikey'] ?? $headers['APIKEY'] ?? $headers['apikey'] ?? null;
+
+if ($receivedKey !== API_KEY) {
     http_response_code(403);
     header('Content-Type: application/json');
     echo json_encode(['errore' => 'API-KEY non corretta']);
