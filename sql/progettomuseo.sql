@@ -31,7 +31,7 @@ CREATE TABLE `mostre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `mostre` (`mos_id`, `mos_nome`, `mos_data_inizio`, `mos_data_fine`) VALUES
-(1, 'Rinascimento Italiano', '2025-06-01', '2025-07-15'),
+(1, 'Rinascimento Italiano', '2025-04-01', '2025-06-15'),
 (2, 'Impressionismo Francese', '2025-07-20', '2025-09-10'),
 (3, 'Avanguardie del 900', '2025-09-15', '2025-10-30'),
 (4, 'Arte Contemporanea', '2025-11-01', '2025-12-15'),
