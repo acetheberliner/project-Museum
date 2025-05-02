@@ -44,64 +44,7 @@ $page_title = 'Aggiorna cliente';
     </div>
 </div>
 
-<script>
-const BASE_URL = 'http://localhost/laboratorio/progettoMuseo/api/';
-const APIKEY = 'b4st0I5868HdCLAdeotkrSPGdeT1Df9ixpeQpWgD';
-
-document.getElementById('btnAggiorna').addEventListener('click', async () => {
-    const id = document.getElementById('cli_id').value;
-    const tel = document.getElementById('cli_tel').value;
-    const output = document.getElementById('output');
-
-    if (!id || !tel) {
-        output.innerHTML = '<span class="text-danger">⚠️ Inserisci tutti i campi richiesti</span>';
-        return;
-    }
-
-    output.innerHTML = '<em>// Caricamento...</em>';
-
-    try {
-        // 1. Recupero numero attuale
-        const resGet = await fetch(`${BASE_URL}clienti`, {
-            headers: {
-                'APIKEY': APIKEY,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const clienti = await resGet.json();
-        const cliente = clienti.find(c => c.cli_id == id);
-
-        if (!cliente) {
-            output.innerHTML = `<span class="text-danger">❌ Cliente con ID ${id} non trovato.</span>`;
-            return;
-        }
-
-        const telPrima = cliente.cli_telefono;
-
-        // 2. Aggiorno telefono
-        const resPut = await fetch(`${BASE_URL}clienti/${id}`, {
-            method: 'PUT',
-            headers: {
-                'APIKEY': APIKEY,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ cli_telefono: tel })
-        });
-
-        const esito = await resPut.json();
-
-        // 3. Output HTML
-        output.innerHTML = `
-            <p><strong>✅ ${esito.esito}</strong></p>
-            <p><b>Numero precedente:</b> <del class="text-danger ">${telPrima}</del><br>
-            <b>Numero aggiornato:</b> <span class="text-info">${tel}</span></p>
-        `;
-    } catch (err) {
-        output.innerHTML = `<span class="text-danger">⚠️ Errore: ${err.message}</span>`;
-    }
-});
-</script>
+<script src="/laboratorio/progettoMuseo/js/wsCliente.js"></script>
 
 </body>
 </html>
