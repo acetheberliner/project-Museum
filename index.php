@@ -29,7 +29,7 @@ $loggedIn = isset($_SESSION['loggedin']);
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            <p class="text-white mb-0">Bagnolini Tommaso</p>
         </div>
     </nav>
 

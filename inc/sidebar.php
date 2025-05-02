@@ -53,6 +53,13 @@ $base = $in_azioni ? '../' : '';
   color: #dc3545;
 }
 
+.sidebar a#test-link:hover {
+  background: #292b3a;
+  border-left: 5px solid #f39f04;
+  padding-left: 15px;
+  color: #f39f04;
+}
+
 .sidebar .user-info {
   text-align: center;
   padding: 20px;
@@ -72,7 +79,7 @@ $base = $in_azioni ? '../' : '';
 <div class="sidebar">
     <div class="user-info border-0 text-center">
         <!-- immagine avatar generata dinamicamente usando l'id utente come parametro per ottenere un'immagine unica -->
-        <img src="https://i.pravatar.cc/100?img=<?= $user_id + 68 ?>" alt="Avatar"> <!-- 68 è solo un "seed" per pravatar.cc per ottenere un pool di pfp che mi piacesse  -->
+        <img src="https://i.pravatar.cc/100?img=<?= $user_id + 67 ?>" alt="Avatar"> <!-- 67 è solo un "seed" per pravatar.cc per ottenere un pool di pfp che mi piacesse  -->
 
         <!-- Protegge da attacchi XSS -->
         <h5><?= htmlspecialchars($user_name) ?></h5>
@@ -98,7 +105,7 @@ $base = $in_azioni ? '../' : '';
         echo "<a href='{$base}azioni/gestione_utenti.php'><i class='bi bi-key'></i> Utenti</a>";
     }
     ?>
-    <a href="<?= $base ?>api_test.php" class="btn w-fit"><i class="bi bi-cone-striped"></i> Test API</a>
+    <a href="<?= $base ?>api_test.php" id="test-link"><i class="bi bi-cone-striped"></i> Test API</a>
     <a href="#" id="logout-link" class="logout-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
 </div>
 
