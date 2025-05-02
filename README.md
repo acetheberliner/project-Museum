@@ -2,7 +2,7 @@
 
 ---
 
-🌐 **Sito online**: [https://projectmuseum.infinityfreeapp.com](https://projectmuseum.infinityfreeapp.com)
+🌐 **Sito online**: [http://projectmuseum.infinityfreeapp.com/index.php](http://projectmuseum.infinityfreeapp.com/index.php)
 
 ---
 
