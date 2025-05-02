@@ -394,6 +394,17 @@ if (!isset($_SESSION['loggedin'])) {
     <p>Nessun errore previsto, salvo problemi generici del server HTTP <code>500</code>.</p>
 </section>
 <!---------------------------------------------------------------------------------------------------------------->
+<!-- CHANGELOG -->
+<section class="api-section">
+    <h4>📝 Changelog</h4>
+    <p>Storico delle modifiche effettuate agli endpoint API.</p>
+
+    <ul class="list-unstyled">
+      <li><strong>📅 14/04/2025:</strong> Prima versione pubblica delle API di Project Museum.</li>
+      <li><strong>📅 02/05/2025:</strong> Restyle, re-compose e seconda versione pubblica delle API.</li>
+    </ul>
+</section>
+<!---------------------------------------------------------------------------------------------------------------->
 </div>
 </body>
 </html>
