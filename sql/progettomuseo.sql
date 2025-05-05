@@ -90,6 +90,8 @@ CREATE TABLE `utenti` (
 /*
   ⚠️ Inserimento utenti da fare tramite script PHP:
   utils/populate_users.php
+  o
+  http://projectmuseum.infinityfreeapp.com/utils/populate_users.php (in ambiente online su InfinityFree)
   Questo assicura che le password vengano salvate in forma hashata.
 */
 
